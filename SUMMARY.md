@@ -34,5 +34,14 @@
 * [Privilèges](src/200/020-privileges.md)
 * [Sauvegardes](src/200/030-sauvegardes.md)
 
+## Sécurisation des communications
 
+* [Packet Sniffing](src/300/010-packet-sniffing.md)
+* [Subnets](src/300/020-subnets.md)
+* [Port scanning](src/300/030-port-scanning.md)
+* [SSL et Reverse Proxy](src/300/040-ssl.md)
 
+## Sécurisation des applications Web
+
+* [Autorisation de vos utilisateurs](src/400/020-autorisation.md)
+* [Vecteurs d'attaque d'un site web](src/400/030-vectors-attaque.md)

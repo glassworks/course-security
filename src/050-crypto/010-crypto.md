@@ -172,7 +172,7 @@ Le sujet de cryptographie est vast et divers.
 
 Je recommande fortement le livre _Cryptonomicon_, un roman d'espionnage de Neal Stephenson qui plonge profondément dans le sujet de cryptographie. Le livre est à la fois amusant, à la fois très informatif !
 
-<figure><img src="../../.gitbook/assets/cryptonomicon_.jpg" alt=""><figcaption><p>Source de l'image : <a href="https://radiolab.org/episodes/139426-radiolab-reads-cryptonomicon">RadioLab</a></p></figcaption></figure>
+<figure><img src="./img/cryptonomicon_.jpg" alt=""><figcaption><p>Source de l'image : <a href="https://radiolab.org/episodes/139426-radiolab-reads-cryptonomicon">RadioLab</a></p></figcaption></figure>
 
 [https://livre.fnac.com/a2592325/Neal-Stephenson-Cryptonomicon](https://livre.fnac.com/a2592325/Neal-Stephenson-Cryptonomicon)
 
