@@ -17,3 +17,10 @@
 ## Exercice
 
 [Provisionner une VM](src/100/010-exercice-vm.md)
+
+## Sécurisation des fichiers
+
+[Identité](src/150/010-identity.md)
+[Actions](src/150/020-actions.md)
+[Permissions](src/150/030-permissions.md)
+[Données cryptées au repos](src/150/040-encryption-at-rest.md)

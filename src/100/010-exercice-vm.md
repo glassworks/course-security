@@ -12,8 +12,9 @@ Déployez une instance chez votre fournisseur cloud préféré :
 
 * Si pas déjà fait, créez votre compte. Rentrez vos coordonnées bancaires, et suivez les étapes pour valider votre compte 
 
-* Provisionner une instance - choisissez la moins chère !!
+* Provisionner une instance - choisissez la moins chère !!  
   * &#x20;:warning: Attention :warning: , chez Scaleway, utilisez l'instance type _**DEV1-S**_ qui est la moins chère
+* Installez **Ubuntu** comme système d'exploitation !
 * Connectez-vous à votre instance avec `ssh` :
 
 ```bash
