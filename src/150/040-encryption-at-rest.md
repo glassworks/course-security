@@ -1,16 +1,18 @@
-# Cryptage au repos
+# Données cryptées au repos
 
-Outre les privilèges sur les fichiers, nous voulons nous assurer que les données sont cryptées sur le périphérique de stockage. 
+## Cryptage au repos
+
+Outre les privilèges sur les fichiers, nous voulons nous assurer que les données sont cryptées sur le périphérique de stockage.
 
 Même si l'appareil est volé, ou si un pirate informatique accède à la machine et peut lire directement l'appareil, il ne devrait pas être en mesure de comprendre le contenu sans une clé cryptographique.
 
 Dans cette section, nous allons apprendre à attacher un volume à une VM, à le formater et à ajouter une couche cryptographique.
 
-# Disques vs partitions
+## Disques vs partitions
 
 Un disque est un périphérique comme un disque dur ou une clé USB. Sur un disque, on peut créer une ou plusieurs _partitions_, qui sont des espaces indépendantes.
 
-Comment voir les disques et partitions ? Cela change en fonction de votre parfum d'Unix. Sur Ubuntu, on utilise la commande `lsblk` (_l_i_s_t _bl_o_c_k devices) :
+Comment voir les disques et partitions ? Cela change en fonction de votre parfum d'Unix. Sur Ubuntu, on utilise la commande `lsblk` (**l**i**s**t **bl**ock devices) :
 
 ```bash
 kevin%nguni.fr@unix-shell-students:~$ lsblk
@@ -28,15 +30,15 @@ Ici, on voit que le disque `vda` contient 3 partitions.
 
 Une partition ou un disque n'est pas obligatoirement monté dans la hiérarchie. `lsblk` nous donne de l'information des périphériques connectés seulement. Il faudrait la monter avant de l'utiliser, et de les voir avec `df`.
 
-## Provisionner un volume dans votre Cloud
+### Provisionner un volume dans votre Cloud
 
 Rendez-vous chez votre fournisseur de services en nuage et approvisionnez un nouveau volume (le plus petit et le moins cher que vous puissiez trouver) qui sera attaché à votre VM.
 
 Nous allons maintenant apprendre à formater et à monter ce volume.
 
-## Formater un disque ou partition
+### Formater un disque ou partition
 
-Formater un disque ou une partition dépende du parfum Unix que vous utilisez. Dans Ubuntu, on utilise `mkfs` (_m_a_k_e _f_ile _s_ystem).
+Formater un disque ou une partition dépende du parfum Unix que vous utilisez. Dans Ubuntu, on utilise `mkfs` (**m**a**k**e **f**ile **s**ystem).
 
 Par exemple :
 
@@ -45,7 +47,7 @@ Par exemple :
 mkfs.ext4 /dev/sda
 ```
 
-## Monter un périphérique
+### Monter un périphérique
 
 Si vous branchez une clé USB ou disque dur interne (ou, si vous êtes chez un hébergeur cloud, et vous aimeriez attacher une volume externe), on commence par d'abord lister les périphériques (avec `lsblk`), puis on le monte à l'endroit où on veut :
 
@@ -60,7 +62,7 @@ Exemple :
 mount -o defaults /dev/sda /mnt/data
 ```
 
-## Monter les disques/partitions/volumes au démarrage
+### Monter les disques/partitions/volumes au démarrage
 
 Si on redémarre notre machine UNIX après avoir monter un disque, on perdra nos modifications.
 
@@ -94,7 +96,7 @@ umount /mnt/data
 mount /mnt/data
 ```
 
-Si mount fonctionne correctement, vous pouvez redémarrer votre instance avec :&#x20;
+Si mount fonctionne correctement, vous pouvez redémarrer votre instance avec :
 
 ```bash
 reboot
@@ -112,7 +114,7 @@ nano /etc/fstab
 # -> ensuite commentez la ligne ajoutée auparavant
 ```
 
-## Cryptage : LUKS
+### Cryptage : LUKS
 
 LUKS est le système utilisé pour chiffrer un volume.
 
@@ -127,7 +129,6 @@ Nous avons déjà vu que quand on parle de la cryptographie, il faudrait nécess
 
 Nous commençons par générer une clé forte, en utilisant l'outil `openssh` par exemple. Plus la clé est longue, plus elle est sécurisée :
 
-
 ```bash
 # Générer un mot de passe bien unique
 openssl rand -base64 32
@@ -140,7 +141,6 @@ cryptsetup -c aes-xts-plain64 -v luksFormat /dev/sda
 ```
 
 Nous avons formaté le volume crypté. Ce volume ne peut pas être lu comme un volume normal. Il faudrait fournir la clé de cryptage. Donc avant de le monter, il faut configurer le périphérique :
-
 
 ```bash
 # Configurer le peripherique 
@@ -171,10 +171,9 @@ mount /dev/mapper/encrypteddata /mnt/encrypteddata
 
 Nous pouvons donc naviguer à `/mnt/encrypteddata` et créer et modifier les fichiers. Nous pouvons aussi préciser ce chemin pour le stockage de nos données d'une base de données SGBDR par exemple.
 
-Mais, avant de le faire, il y a un problème : le volume crypté n'existera uniquement tant que l'instance ne redémarre pas. Au redémarrage, il faudrait fournir de nouveau le mot de passe de cryptage. 
+Mais, avant de le faire, il y a un problème : le volume crypté n'existera uniquement tant que l'instance ne redémarre pas. Au redémarrage, il faudrait fournir de nouveau le mot de passe de cryptage.
 
 L'avantage de LUKS est qu'on peut ajouter plusieurs clés en parallèle. Nous allons créer une autre clé qui sera plutôt stocké dans un fichier sur un autre volume. Au démarrage, nous allons utiliser ce fichier pour déverrouiller notre volume.
-
 
 ```bash
 # Créer uns chaîne de caractères aléatoire, et les sauvegarder dans /etc/.luks-encrypteddata-key
@@ -223,12 +222,12 @@ C'est super. Maintenant, on peut déverrouiller un volume sans fournir manuellem
 
 Vous vous souvenez du fichier `/etc/fstab` ? Nous avons l'équivalent pour les volumes cryptés : `/etc/crypttab`, qui prend le format suivant :
 
-
 ```
 <target name> <source device> <key-file> <options>
 ```
 
-Les options sont :
+Les options sont :
+
 * `target name` : le nom de notre volume, pour nous `encrypteddata`
 * `source device` : le UUID de notre volume. On peut trouver le UUID avec `blkid /dev/sda`. Dans mon exemple, j'ai trouvé le UUID `9096ac61-20bf-4c88-a770-35e6b71897b7`.
 * `key-file` : le chemin absolu du fichier avec la clé, pour nous `/etc/.luks-encrypteddata-key`
@@ -249,6 +248,7 @@ Cette procédure assurera que le périphérique virtuel est créé (le volume cr
 # nano /etc/fstab
 /dev/mapper/encrypteddata  /mnt/encrypteddata ext4 defaults,nofail 0 0
 ```
+
 Vérifiez bien que vous votre volume monte correctement :
 
 ```bash
@@ -258,9 +258,7 @@ mount /mnt/encrypteddata/
 
 Ensuite, redémarrez votre instance pour tester.
 
-
 {% hint style="success" %}
- 
 **La rotation des clés**
 
 Vous avez sûrement remarqué qu'on peut ajouter plusieurs clés pour décrypter notre volume. Comment cela fonctionne ?
@@ -270,34 +268,29 @@ Il y a deux niveaux de clé :
 1. Une clé pour nous, l'utilisateur
 2. Une clé "interne" connu et utilisé uniquement par LUKS
 
-Les données sur le disque sont cryptées avec la deuxième clé. 
+Les données sur le disque sont cryptées avec la deuxième clé.
 
-Notre clé à nous sert uniquement à décrypter la clé interne. 
+Notre clé à nous sert uniquement à décrypter la clé interne.
 
 Cela veut dire qu'on peut crypter plusieurs fois la clé interne avec différentes clés "externe", sans crypter à nouveau toutes les données sur le volume !
 
 L'autre avantage est qu'on peut implémenter de **la rotation des clés**. Tous les X jours/semaines/mois, nous ajoutons une nouvelle clé, et on supprime l'ancienne. L'idée est d'encore minimiser les dégâts si une des clés est divulguée, car on rend obsolète les clés précédentes.
-
-
-
 {% endhint %}
 
 {% hint style="warning" %}
-
 **Le stockage des clés**
 
 Pour le moment, nous avons 2 clés :
-- La clé initiale qu'on a mémorisé ou stocké sur notre machine locale
-- La clé dans `/etc/.luks-encrypteddata-key` qui est stocké sur un autre volume
+
+* La clé initiale qu'on a mémorisé ou stocké sur notre machine locale
+* La clé dans `/etc/.luks-encrypteddata-key` qui est stocké sur un autre volume
 
 Vous remarquez qu'aucune clé n'est stockée sur le même volume que les données. Donc si quelqu'un pénètre la data-center et vol le disque dur avec nos données, il ne pourra pas décrypter nos données.
 
 Vous pouvez également protéger le fichier de clé en utilisant les permissions de base de Linux (uniquement lisible par `root`) en utilisant `chmod`.
-
 {% endhint %}
 
-
 Références:
+
 * [https://www.percona.com/blog/mysql-encryption-at-rest-part-1-luks/](https://www.percona.com/blog/mysql-encryption-at-rest-part-1-luks/)
 * [https://kifarunix.com/automount-luks-encrypted-device-in-linux/](https://kifarunix.com/automount-luks-encrypted-device-in-linux/)
-
