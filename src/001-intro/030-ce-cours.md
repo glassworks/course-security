@@ -1,11 +1,9 @@
 # Ce cours
 
-This course aims to give you a foundational overview of cybersecurity.
+Ce cours vise à vous donner une vue d'ensemble de la cybersécurité.&#x20;
 
-Its aim is to equip you with the technical expertise necessary to anticipate and secure your machines, communications, infrastructures.
+Il vise à vous doter de l'expertise technique nécessaire pour anticiper et sécuriser vos machines, vos communications, vos infrastructures.&#x20;
 
-This course focuses primarily on the **technical aspects** of security, over a number of levels :
+Ce cours se concentre principalement sur les **aspects techniques de prévention**, sur plusieurs niveaux :
 
-
-
-![](./img/dimensions.png)
+![](img/dimensions.png)
