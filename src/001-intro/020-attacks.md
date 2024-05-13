@@ -2,48 +2,49 @@
 
 La première étape d'une initiation à la cybersécurité consiste à connaître les différents types de risques, notamment les vecteurs d'attaque utilisés aujourd'hui. [Le site web de l'OWASP](https://owasp.org/www-project-top-ten/), par exemple, dresse la liste des cybermenaces les plus courantes :
 
-![](./img/owasp.png)
+![](img/owasp.png)
 
 ## Vecteurs d'attaque
 
 Il existe de nombreux types d'attaques. Les connaissez-vous tous ? Pouvez-vous élaborer une stratégie pour réduire ces risques ?
 
-
 Risques liés aux machines et aux systèmes d'exploitation :
 
-- virus
-- cheval de Troie
-- rootkit
-- ransomware
-- ...
+* virus
+* cheval de Troie
+* rootkit
+* ransomware
+* ...
 
 Risques liés au réseau et à la communication :
 
-- "man-in-the-middle" et "replay"
-- *packet-sniffing* (reniflage)
-- *port-scanning* (balayage de port)
-- DDoS
-- ...
+* "man-in-the-middle" et "replay"
+* _packet-sniffing_ (reniflage)
+* _port-scanning_ (balayage de port)
+* DDoS
+* ...
 
 Attaques au niveau des services :
 
-- failles d'injection
-- *zero-day bugs* bogues du jour zéro
-- ...
+* failles d'injection
+* _zero-day bugs_ bogues du jour zéro
+* ...
 
 Attaques par Internet :
 
-- bogues d'identification et d'autorisation
-- XSS
-- CSRF
-- *click-jacking* (détournement de clics)
-- ...
+* bogues d'identification et d'autorisation
+* XSS
+* CSRF
+* _click-jacking_ (détournement de clics)
+* ...
 
 Attaques humaines :
 
-- *phishing* (hameçonnage)
-- stockage / communication / oubli des mots de passes
-- ...
+* _phishing_ (hameçonnage)
+* stockage / communication / oubli des mots de passes
+* ...
+
+<figure><img src="../../.gitbook/assets/FB_IMG_1715438731969.jpg" alt=""><figcaption><p>Phishing "old-school" ?</p></figcaption></figure>
 
 ## Examples
 
@@ -61,7 +62,7 @@ TunnelVision
 
 > Les failles en question avaient été découvertes à quelques jours d’intervalle, dans MOVEit Transfer, logiciel de transfert sécurisé de fichiers. L’une et l’autre ouvraient la voie à des injections SQL au niveau du front-end web. Avec, entre autres conséquences potentielles, l’exfiltration de données.
 
-[MoveIT / Pole Emploi](https://www.silicon.fr/majorel-cl0p-moveit-fuite-donnees-pole-emploi-470755.html) 
+[MoveIT / Pole Emploi](https://www.silicon.fr/majorel-cl0p-moveit-fuite-donnees-pole-emploi-470755.html)
 
 ### Log4J (2021)
 
@@ -73,6 +74,6 @@ TunnelVision
 
 ... et bien sur, plein d'autres ...
 
-![](./img/breaches.png)
+![](img/breaches.png)
 
 [Liste des failles 2023](https://www.itgovernance.co.uk/blog/list-of-data-breaches-and-cyber-attacks-in-2023)
