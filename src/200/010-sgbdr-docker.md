@@ -278,4 +278,9 @@ docker ps
 # e9f05406c881   mariadb "docker-entrypoint.s…"   3 seconds ago   Up 2 seconds   0.0.0.0:7100->3306/tcp, :::7100->3306/tcp     security-mon_sgbdr-1
 ```
 
-Réessayez de vous connecter à TablePlus, en spécifiant cette fois le port 7100. Vous pouvez vous connecter !
+Réessayez de vous connecter à TablePlus, en spécifiant cette fois le port 7100. 
+
+
+{% hint style="success" %}
+Toujours pas de connexion ? Certains services Cloud comme Azure disposent d'un pare-feu intégré. Vous devrez vous connecter à votre console, et exposer le port 7100 !
+{% endhint %}

@@ -4,7 +4,7 @@ Lorsque nous avons approvisionné notre base de données, nous avons délibéré
 
 L'ouverture d'un port expose notre serveur à des vecteurs d'attaque. Des bogues ou des faiblesses de type "zero day" peuvent être exploités par des pirates informatiques s'ils détectent qu'un service X est à l'écoute sur un port.
 
-Des scanners portuaires existent en ligne et peuvent être téléchargés gratuitement, par exemple :
+Des Port Scanners existent en ligne et peuvent être téléchargés gratuitement, par exemple :
 
 [PenTest port scanner](https://pentest-tools.com/network-vulnerability-scanning/port-scanner-online-nmap?view_report=true)
 
